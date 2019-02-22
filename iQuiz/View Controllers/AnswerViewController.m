@@ -119,8 +119,10 @@
 
 - (void)nextButtonPressed
 {
-	
-	
+	if ([self.delegate respondsToSelector:@selector(updateStateAndTransitionToNewVC:)]) {
+		BOOL answeredCorrectly = [userQuizAnswer isEqualToString:correctQuizAnswer];
+		[self.delegate updateStateAndTransitionToNewVC:answeredCorrectly];
+	}
 }
 
 @end

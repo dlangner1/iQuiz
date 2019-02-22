@@ -19,6 +19,7 @@
 @implementation QuestionViewController
 {
 	int currentQuestionIndex;
+	int correctAnswers;
 }
 
 #pragma mark - Initializer
@@ -28,6 +29,7 @@
 	self = [super init];
 	if (self) {
 		currentQuestionIndex = 0;
+		correctAnswers = 0;
 		
 		self.quizQuestions = [NSMutableArray arrayWithCapacity:data.count];
 		[data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -54,7 +56,12 @@
 												alpha:1.0f];
 	
 	// create the quiz question view with the first question
-	self.quizQuestionView = [[QuizQuestionView alloc]initWithQuestion:self.quizQuestions[currentQuestionIndex] AndDelegate:self];
+	[self createQuizView:self.quizQuestions[currentQuestionIndex]];
+}
+
+- (void)createQuizView:(QuizQuestion *)question
+{
+	self.quizQuestionView = [[QuizQuestionView alloc]initWithQuestion:question AndDelegate:self];
 	[self.view addSubview:self.quizQuestionView];
 	
 	if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact
@@ -63,7 +70,7 @@
 	} else {
 		[self.quizQuestionView setAnswerStackViewSpacing:30];
 	}
-
+	
 	self.quizQuestionView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.quizQuestionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:10].active = YES;
 	[self.quizQuestionView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-10].active = YES;
@@ -103,5 +110,24 @@
 }
 
 #pragma mark - AnswerViewControllerDelegate
+
+- (void)updateStateAndTransitionToNewVC:(BOOL)isCorrectAnswer
+{
+	if (isCorrectAnswer) {
+		correctAnswers += 1;
+	}
+	currentQuestionIndex += 1;
+	
+	if (currentQuestionIndex < self.quizQuestions.count) {
+		QuizQuestion *nextQuestion = [self.quizQuestions objectAtIndex:currentQuestionIndex];
+		[self.quizQuestionView removeFromSuperview];
+		[self createQuizView:nextQuestion];
+	} else {
+		// show done view controller
+	}
+	
+	// do some work here either setting up next question or showing done scene
+	[self dismissViewControllerAnimated:TRUE completion:nil];
+}
 
 @end

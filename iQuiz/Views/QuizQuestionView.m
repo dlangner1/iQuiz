@@ -26,6 +26,9 @@
 		self.questionLabel = [[UILabel alloc]init];
 		self.questionLabel.text = questionData.question;
 		self.questionLabel.textColor = UIColor.whiteColor;
+		self.questionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+		self.questionLabel.numberOfLines = 0;
+		self.questionLabel.textAlignment = NSTextAlignmentCenter;
 		UIFontDescriptor * fontD = [self.questionLabel.font.fontDescriptor
 	fontDescriptorWithSymbolicTraits: UIFontDescriptorTraitItalic];
 		[self.questionLabel setFont:[UIFont fontWithDescriptor:fontD size:35]];
@@ -60,8 +63,10 @@
 - (void)addConstraintsToSubviews
 {
 	self.questionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.questionLabel.centerXAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.centerXAnchor].active = YES;
 	[self.questionLabel.topAnchor constraintGreaterThanOrEqualToAnchor:self.safeAreaLayoutGuide.topAnchor].active = YES;
+	[self.questionLabel.leftAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.leftAnchor constant:10].active = YES;
+	[self.questionLabel.rightAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.rightAnchor constant:-10].active = YES;
+	
 	self.answerButtonsContainer.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.answerButtonsContainer.topAnchor constraintEqualToAnchor:self.questionLabel.bottomAnchor constant:10].active = YES;
 	[self.answerButtonsContainer.leftAnchor constraintEqualToAnchor:self.leftAnchor].active = YES;

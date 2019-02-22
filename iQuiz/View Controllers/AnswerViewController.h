@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol AnswerViewControllerDelegate <NSObject>
 
-- (void)dismissViewController;
+- (void)updateStateAndTransitionToNewVC:(BOOL)isCorrectAnswer;
 
 @end
 
