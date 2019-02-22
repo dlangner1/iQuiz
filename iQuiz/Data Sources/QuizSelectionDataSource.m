@@ -25,16 +25,24 @@
     if (cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellIdentifier"];
     }
-    
-    QuizTopic *topic = [self.quizTopics objectAtIndex:indexPath.row];
-    cell.imageView.image = topic.image;
-    cell.textLabel.text = topic.name;
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.detailTextLabel.text = topic.topicDescription;
+	
+	// dictionary
+    NSDictionary *topicDict = [self.quizTopics objectAtIndex:indexPath.row];
+	
+	NSString *title = [topicDict objectForKey:@"title"];
+	NSString *desc = [topicDict objectForKey:@"desc"];
+	// NSString *questions = [topicDict objectForKey:@"questions"];
+	
+	cell.imageView.image = [UIImage imageNamed:title];
+	
+	cell.textLabel.text = title;
+	cell.textLabel.numberOfLines = 0;
+	cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+	
+	cell.detailTextLabel.text = desc;
     cell.detailTextLabel.numberOfLines = 0;
     cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    
+	
     return cell;
 }
 
