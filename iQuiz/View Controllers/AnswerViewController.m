@@ -54,10 +54,7 @@
 	 [self.nextButton addTarget:self action:@selector(nextButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 	self.nextButton.contentEdgeInsets = UIEdgeInsetsMake(15, 40, 15, 40);
 	self.nextButton.layer.cornerRadius = 5;
-	self.nextButton.backgroundColor = [UIColor colorWithRed:20.0f/255.0f
-													  green:29.0f/255.0f
-													   blue:38.0f/255.0f
-													  alpha:1.0f];
+	self.nextButton.backgroundColor = [UIColor colorWithRed:20.0f/255.0f green:29.0f/255.0f blue:38.0f/255.0f alpha:1.0f];
 	
 	self.questionLabel = [[UILabel alloc]init];
 	self.questionLabel.text = quizQuestion;
@@ -74,7 +71,7 @@
 	[self.correctAnswerLabel setFont:[UIFont systemFontOfSize:24]];
 	self.correctAnswerLabel.numberOfLines = 0;
 	self.correctAnswerLabel.lineBreakMode = NSLineBreakByWordWrapping;
-	
+	self.correctAnswerLabel.textAlignment = NSTextAlignmentCenter;
 	
 	self.userAnswerLabel = [[UILabel alloc]init];
 	self.userAnswerLabel.text = [@"You answered: \n" stringByAppendingString:userQuizAnswer];;
@@ -82,6 +79,7 @@
 	[self.userAnswerLabel setFont:[UIFont systemFontOfSize:24]];
 	self.userAnswerLabel.numberOfLines = 0;
 	self.userAnswerLabel.lineBreakMode = NSLineBreakByWordWrapping;
+	self.userAnswerLabel.textAlignment = NSTextAlignmentCenter;
 	
 	[self.view addSubview:self.questionLabel];
 	[self.view addSubview:self.correctAnswerLabel];
@@ -93,23 +91,26 @@
 
 - (void)layoutSubviews
 {
+	// question label
 	self.questionLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.questionLabel.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:10].active = YES;
 	[self.questionLabel.leftAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leftAnchor constant:10].active = YES;
 	[self.questionLabel.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor constant:-10].active = YES;
 	
+	// correct answer label
 	self.correctAnswerLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.correctAnswerLabel.topAnchor constraintGreaterThanOrEqualToAnchor:self.questionLabel.bottomAnchor constant:10].active = YES;
 	[self.correctAnswerLabel.leftAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leftAnchor constant:10].active = YES;
 	[self.correctAnswerLabel.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor constant:-10].active = YES;
 
-	
+	// user answer label
 	self.userAnswerLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.userAnswerLabel.topAnchor constraintEqualToAnchor:self.correctAnswerLabel.bottomAnchor constant:30].active = YES;
 	[self.userAnswerLabel.leftAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leftAnchor constant:10].active = YES;
 	[self.userAnswerLabel.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor constant:-10].active = YES;
 	[self.userAnswerLabel.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
 
+	// next button
 	self.nextButton.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.nextButton.topAnchor constraintGreaterThanOrEqualToAnchor: self.userAnswerLabel.bottomAnchor constant:30].active = YES;
 	[self.nextButton.leftAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leftAnchor constant:10].active = YES;

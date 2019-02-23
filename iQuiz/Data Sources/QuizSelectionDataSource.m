@@ -31,17 +31,21 @@
 	
 	NSString *title = [topicDict objectForKey:@"title"];
 	NSString *desc = [topicDict objectForKey:@"desc"];
-	// NSString *questions = [topicDict objectForKey:@"questions"];
+	
+	cell.backgroundColor = [UIColor colorWithRed:36.0f/255.0f green:52.0f/255.0f blue:71.0f/255.0f alpha:1.0f];
 	
 	cell.imageView.image = [UIImage imageNamed:title];
 	
 	cell.textLabel.text = title;
 	cell.textLabel.numberOfLines = 0;
 	cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+	cell.textLabel.textColor = UIColor.whiteColor;
 	
 	cell.detailTextLabel.text = desc;
     cell.detailTextLabel.numberOfLines = 0;
     cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+	cell.detailTextLabel.textColor = UIColor.whiteColor;
+
 	
     return cell;
 }

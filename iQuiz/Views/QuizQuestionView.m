@@ -50,6 +50,7 @@
 															alpha:1.0f];
 		self.submitButton.contentEdgeInsets = UIEdgeInsetsMake(15, 40, 15, 40);
 		self.submitButton.layer.cornerRadius = 5;
+		
 		[self addSubview:self.questionLabel];
 		[self addSubview:self.answerButtonsContainer];
 		[self addSubview:self.submitButton];
@@ -63,20 +64,21 @@
 - (void)addConstraintsToSubviews
 {
 	self.questionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.questionLabel.topAnchor constraintGreaterThanOrEqualToAnchor:self.safeAreaLayoutGuide.topAnchor].active = YES;
+	[self.questionLabel.topAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.topAnchor].active = YES;
 	[self.questionLabel.leftAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.leftAnchor constant:10].active = YES;
 	[self.questionLabel.rightAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.rightAnchor constant:-10].active = YES;
 	
 	self.answerButtonsContainer.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.answerButtonsContainer.topAnchor constraintEqualToAnchor:self.questionLabel.bottomAnchor constant:10].active = YES;
+	[self.answerButtonsContainer.topAnchor constraintGreaterThanOrEqualToAnchor:self.questionLabel.bottomAnchor constant:10].active = YES;
 	[self.answerButtonsContainer.leftAnchor constraintEqualToAnchor:self.leftAnchor].active = YES;
 	[self.answerButtonsContainer.rightAnchor constraintEqualToAnchor:self.rightAnchor].active = YES;
 	[self.answerButtonsContainer.centerYAnchor constraintEqualToAnchor:self.centerYAnchor].active = YES;
 	
 	self.submitButton.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.submitButton.topAnchor constraintEqualToAnchor:self.answerButtonsContainer.bottomAnchor constant:10].active = YES;
-	[self.submitButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
-	[self.submitButton.bottomAnchor constraintLessThanOrEqualToAnchor:self.safeAreaLayoutGuide.bottomAnchor].active = YES;
+	[self.submitButton.topAnchor constraintGreaterThanOrEqualToAnchor: self.answerButtonsContainer.bottomAnchor constant:10].active = YES;
+	[self.submitButton.leftAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.leftAnchor constant:10].active = YES;
+	[self.submitButton.rightAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.rightAnchor constant:-10].active = YES;
+	[self.submitButton.bottomAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.bottomAnchor].active = YES;
 }
 
 - (void)setAnswerStackViewSpacing:(CGFloat)size

@@ -26,14 +26,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	self.view.backgroundColor = [UIColor colorWithRed:36.0f/255.0f green:52.0f/255.0f blue:71.0f/255.0f alpha:1.0f];
 	[self setupSettingsNavigationBar];
 	self.welcomeView = [[WelcomeView alloc]init];
 	[self.view addSubview:self.welcomeView];
 	
 	self.welcomeView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.welcomeView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor].active = YES;
-	[self.welcomeView.leftAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leftAnchor].active = YES;
-	[self.welcomeView.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor].active = YES;
+	[self.welcomeView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
+	[self.welcomeView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
 	[self.welcomeView.heightAnchor constraintEqualToConstant:200].active = YES;
 	
 	[QuizTopicAPI getQuizData:^(NSArray * _Nonnull results, NSError * _Nonnull error) {
@@ -54,6 +55,7 @@
 {
     self.tableView = [[UITableView alloc]init];
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cellIdentifier"];
+	self.tableView.backgroundColor = [UIColor colorWithRed:36.0f/255.0f green:52.0f/255.0f blue:71.0f/255.0f alpha:1.0f];
 	
     dataSource = [[QuizSelectionDataSource alloc]initWithTopics:data];
     self.tableView.dataSource = dataSource;

@@ -8,6 +8,7 @@
 
 #import "AnswerViewController.h"
 #import "QuestionViewController.h"
+#import "QuizFinishedViewController.h"
 #import "QuizQuestionView.h"
 #import "QuizQuestion.h"
 
@@ -118,15 +119,24 @@
 	}
 	currentQuestionIndex += 1;
 	
+	[self.quizQuestionView removeFromSuperview];
 	if (currentQuestionIndex < self.quizQuestions.count) {
 		QuizQuestion *nextQuestion = [self.quizQuestions objectAtIndex:currentQuestionIndex];
-		[self.quizQuestionView removeFromSuperview];
 		[self createQuizView:nextQuestion];
 	} else {
-		// show done view controller
+		QuizFinishedViewController *finishedVC = [[QuizFinishedViewController alloc]initWithCorrectAnswers:correctAnswers andNumQuestions:self.quizQuestions.count];
+
+		[self addChildViewController:finishedVC];
+		[self.view addSubview:finishedVC.view];
+		finishedVC.view.translatesAutoresizingMaskIntoConstraints = NO;
+		[finishedVC.view.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
+		[finishedVC.view.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
+		[finishedVC.view.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
+		[finishedVC.view.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
+		[finishedVC didMoveToParentViewController:self];
 	}
 	
-	// do some work here either setting up next question or showing done scene
+	// dismiss the modal view that currently lays on top
 	[self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
