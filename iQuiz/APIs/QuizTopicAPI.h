@@ -13,9 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QuizTopicAPI : NSObject
 
 + (void)getQuizDataWithUrl:(NSString * _Nullable)urlString CompletionHandler:(void (^)(NSArray * _Nullable results, NSError *error))completionHandler ;
-
 + (void)saveQuizDataToDisk:(NSData *)data;
-
++ (void)deleteQuizDataFromDisk;
 + (NSArray * _Nullable)readQuizDataFromDisk;
 
 @end

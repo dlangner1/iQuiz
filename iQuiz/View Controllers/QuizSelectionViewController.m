@@ -37,24 +37,8 @@
 	[self.welcomeView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
 	[self.welcomeView.heightAnchor constraintEqualToConstant:200].active = YES;
 	
-	// nil for the URL will use the default data source
-	[QuizTopicAPI getQuizDataWithUrl:nil CompletionHandler:^(NSArray * _Nonnull results, NSError * _Nonnull error) {
-		__weak __typeof__(self) weakSelf = self;
-		dispatch_async(dispatch_get_main_queue(), ^{
-			if (error) {
-				// try to read from disk
-				// otherwise, displayfailed download
-				NSArray *data = [QuizTopicAPI readQuizDataFromDisk];
-				if (data) {
-					[weakSelf createTableView:data];
-				} else {
-					[weakSelf createFailedDownloadView];
-				}
-				return;
-			}
-			[weakSelf createTableView:results];
-		});
-	}];
+	// A nil URL will use the default URL
+	[self fetchDataAndSetupTableViewWithUrl:nil];
 }
 
 #pragma mark - View Setup
@@ -80,10 +64,32 @@
     [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor].active = YES;
 }
 
+- (void)fetchDataAndSetupTableViewWithUrl:(NSString * _Nullable)urlString
+{
+	[QuizTopicAPI getQuizDataWithUrl:urlString CompletionHandler:^(NSArray * _Nonnull results, NSError * _Nonnull error) {
+		__weak __typeof__(self) weakSelf = self;
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if (error) {
+				// try to read from disk
+				// otherwise, displayfailed download
+				NSArray *data = [QuizTopicAPI readQuizDataFromDisk];
+				if (data) {
+					[weakSelf createTableView:data];
+				} else {
+					[weakSelf createFailedDownloadView];
+				}
+				return;
+			}
+			[weakSelf createTableView:results];
+		});
+	}];
+	
+}
+
 - (void)createFailedDownloadView
 {
 	UILabel *failedToDownloadLabel = [[UILabel alloc]init];
-	failedToDownloadLabel.text = @"It looks like you are offline, and we failed to fetch your list of quizzes :(";
+	failedToDownloadLabel.text = @"We failed to fetch your list of quizzes :( \n You are either offline, or the download failed. Check your connectivity and try again";
 	failedToDownloadLabel.textColor = UIColor.whiteColor;
 	failedToDownloadLabel.textAlignment = NSTextAlignmentCenter;
 	failedToDownloadLabel.font = [UIFont systemFontOfSize:20];
@@ -141,8 +147,11 @@
 
 - (void)checkNowButtonPressed:(NSString *)urlString
 {
-	// try fetching new url
-	// reload table view
+	[QuizTopicAPI deleteQuizDataFromDisk];
+	[self.tableView removeFromSuperview];
+	
+	[self fetchDataAndSetupTableViewWithUrl:urlString];
+	
 	[UIView animateWithDuration:0.2 animations:^{
 		self.view.alpha = 1.0;
 	}];

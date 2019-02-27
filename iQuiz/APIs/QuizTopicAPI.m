@@ -35,6 +35,16 @@
 	[task resume];
 }
 
++ (void)deleteQuizDataFromDisk
+{
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+	
+	NSString *filePath = [documentsPath stringByAppendingPathComponent:@"quizData.json"];
+	NSError *error;
+	[fileManager removeItemAtPath:filePath error:&error];
+}
+
 + (void)saveQuizDataToDisk:(NSData *)data
 {
 	NSURL *documentUrl = [[[NSFileManager defaultManager]URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
