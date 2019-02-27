@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)getQuizData:(void (^)(NSArray *results, NSError *error))completionHandler;
 
++ (void)saveQuizDataToDisk:(NSData *)data;
+
++ (NSArray * _Nullable)readQuizDataFromDisk;
+
 @end
 
 NS_ASSUME_NONNULL_END

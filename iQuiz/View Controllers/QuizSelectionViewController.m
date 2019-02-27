@@ -41,7 +41,14 @@
 		__weak __typeof__(self) weakSelf = self;
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if (error) {
-				// display something where table view normally goes
+				// try to read from disk
+				// otherwise, displayfailed download
+				NSArray *data = [QuizTopicAPI readQuizDataFromDisk];
+				if (data) {
+					[weakSelf createTableView:data];
+				} else {
+					[weakSelf createFailedDownloadView];
+				}
 				return;
 			}
 			[weakSelf createTableView:results];
@@ -56,6 +63,8 @@
     self.tableView = [[UITableView alloc]init];
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cellIdentifier"];
 	self.tableView.backgroundColor = [UIColor colorWithRed:36.0f/255.0f green:52.0f/255.0f blue:71.0f/255.0f alpha:1.0f];
+	self.tableView.layoutMargins = UIEdgeInsetsZero;
+	self.tableView.separatorInset = UIEdgeInsetsZero;
 	
     dataSource = [[QuizSelectionDataSource alloc]initWithTopics:data];
     self.tableView.dataSource = dataSource;
@@ -68,6 +77,25 @@
     [self.tableView.leftAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leftAnchor].active = YES;
     [self.tableView.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor].active = YES;
     [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor].active = YES;
+}
+
+- (void)createFailedDownloadView
+{
+	UILabel *failedToDownloadLabel = [[UILabel alloc]init];
+	failedToDownloadLabel.text = @"Failed to fetch quiz data :(";
+	failedToDownloadLabel.textColor = UIColor.whiteColor;
+	failedToDownloadLabel.textAlignment = NSTextAlignmentCenter;
+	failedToDownloadLabel.font = [UIFont systemFontOfSize:20];
+	failedToDownloadLabel.lineBreakMode = NSLineBreakByWordWrapping;
+	failedToDownloadLabel.numberOfLines = 0;
+	
+	[self.view addSubview:failedToDownloadLabel];
+	failedToDownloadLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	[failedToDownloadLabel.leftAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leftAnchor constant:10].active = YES;
+	[failedToDownloadLabel.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor constant:-10].active = YES;
+	[failedToDownloadLabel.topAnchor constraintEqualToAnchor:self.welcomeView.bottomAnchor constant:10].active = YES;
+	[failedToDownloadLabel.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-10].active = YES;
+	
 }
 
 - (void)setupSettingsNavigationBar

@@ -45,7 +45,7 @@
     cell.detailTextLabel.numberOfLines = 0;
     cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
 	cell.detailTextLabel.textColor = UIColor.whiteColor;
-
+	cell.layoutMargins = UIEdgeInsetsZero;
 	
     return cell;
 }

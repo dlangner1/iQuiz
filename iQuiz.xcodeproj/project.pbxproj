@@ -118,8 +118,8 @@
 				F2F60AE3221A2C5000E9C63E /* View Controllers */,
 				F2F60AEA221A2F0B00E9C63E /* Data Sources */,
 				F2F60AE9221A2EF700E9C63E /* Delegates */,
-				F2F60AC0221A2BE700E9C63E /* AppDelegate.m */,
 				F2F60ABF221A2BE700E9C63E /* AppDelegate.h */,
+				F2F60AC0221A2BE700E9C63E /* AppDelegate.m */,
 				F2F60AC8221A2BE700E9C63E /* Assets.xcassets */,
 				F2F60ACD221A2BE700E9C63E /* Info.plist */,
 				F2F60ACE221A2BE700E9C63E /* main.m */,
@@ -139,12 +139,12 @@
 		F2F60AE3221A2C5000E9C63E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F2395E82221FC9FA009CD611 /* AnswerViewController.h */,
+				F2395E83221FC9FA009CD611 /* AnswerViewController.m */,
 				F2F60AE5221A2D9B00E9C63E /* QuizSelectionViewController.h */,
 				F2F60AE6221A2D9B00E9C63E /* QuizSelectionViewController.m */,
 				F2F60AFD221BD33300E9C63E /* QuestionViewController.h */,
 				F2F60AFE221BD33300E9C63E /* QuestionViewController.m */,
-				F2395E82221FC9FA009CD611 /* AnswerViewController.h */,
-				F2395E83221FC9FA009CD611 /* AnswerViewController.m */,
 				F2395E85222096CC009CD611 /* QuizFinishedViewController.h */,
 				F2395E86222096CC009CD611 /* QuizFinishedViewController.m */,
 			);
