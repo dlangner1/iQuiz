@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingsViewController.h"
 @class WelcomeView;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QuizSelectionViewController : UIViewController <UITableViewDelegate>
+@interface QuizSelectionViewController : UIViewController <UITableViewDelegate, SettingsDelegate>
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) WelcomeView *welcomeView;

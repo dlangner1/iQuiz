@@ -11,8 +11,8 @@
 
 @implementation QuizTopicAPI
 
-+ (void)getQuizData:(void (^)(NSArray * _Nullable results, NSError *error))completionHandler {
-    NSString *queryString = @"https://tednewardsandbox.site44.com/questions.json";
++ (void)getQuizDataWithUrl:(NSString * _Nullable)urlString CompletionHandler:(void (^)(NSArray * _Nullable results, NSError *error))completionHandler {
+	NSString *queryString = urlString ? urlString : @"https://tednewardsandbox.site44.com/questions.json";
     NSURL *url = [NSURL URLWithString:queryString];
     NSURLSession *session = [NSURLSession sharedSession];
 	NSURLSessionDataTask *task = [session dataTaskWithURL:url

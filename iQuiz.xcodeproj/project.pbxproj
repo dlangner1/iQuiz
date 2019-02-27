@@ -10,6 +10,7 @@
 		F2395E7E221D000F009CD611 /* AnswerSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2395E7D221D000F009CD611 /* AnswerSelectionView.m */; };
 		F2395E84221FC9FA009CD611 /* AnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2395E83221FC9FA009CD611 /* AnswerViewController.m */; };
 		F2395E87222096CC009CD611 /* QuizFinishedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2395E86222096CC009CD611 /* QuizFinishedViewController.m */; };
+		F2395E8E22264389009CD611 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2395E8D22264389009CD611 /* SettingsViewController.m */; };
 		F2F60AC1221A2BE700E9C63E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F60AC0221A2BE700E9C63E /* AppDelegate.m */; };
 		F2F60AC7221A2BE700E9C63E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2F60AC5221A2BE700E9C63E /* Main.storyboard */; };
 		F2F60AC9221A2BE700E9C63E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F60AC8221A2BE700E9C63E /* Assets.xcassets */; };
@@ -43,6 +44,8 @@
 		F2395E83221FC9FA009CD611 /* AnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerViewController.m; sourceTree = "<group>"; };
 		F2395E85222096CC009CD611 /* QuizFinishedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuizFinishedViewController.h; sourceTree = "<group>"; };
 		F2395E86222096CC009CD611 /* QuizFinishedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuizFinishedViewController.m; sourceTree = "<group>"; };
+		F2395E8C22264389009CD611 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		F2395E8D22264389009CD611 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		F2F60ABC221A2BE700E9C63E /* iQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F60ABF221A2BE700E9C63E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F2F60AC0221A2BE700E9C63E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -147,6 +150,8 @@
 				F2F60AFE221BD33300E9C63E /* QuestionViewController.m */,
 				F2395E85222096CC009CD611 /* QuizFinishedViewController.h */,
 				F2395E86222096CC009CD611 /* QuizFinishedViewController.m */,
+				F2395E8C22264389009CD611 /* SettingsViewController.h */,
+				F2395E8D22264389009CD611 /* SettingsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				F2F60AF6221A3E8100E9C63E /* QuizTopicAPI.m in Sources */,
 				F2395E7E221D000F009CD611 /* AnswerSelectionView.m in Sources */,
 				F2F60B05221BDB1300E9C63E /* QuizQuestionView.m in Sources */,
+				F2395E8E22264389009CD611 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

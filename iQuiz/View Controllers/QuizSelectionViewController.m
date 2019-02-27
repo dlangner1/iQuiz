@@ -37,7 +37,8 @@
 	[self.welcomeView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
 	[self.welcomeView.heightAnchor constraintEqualToConstant:200].active = YES;
 	
-	[QuizTopicAPI getQuizData:^(NSArray * _Nonnull results, NSError * _Nonnull error) {
+	// nil for the URL will use the default data source
+	[QuizTopicAPI getQuizDataWithUrl:nil CompletionHandler:^(NSArray * _Nonnull results, NSError * _Nonnull error) {
 		__weak __typeof__(self) weakSelf = self;
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if (error) {
@@ -82,7 +83,7 @@
 - (void)createFailedDownloadView
 {
 	UILabel *failedToDownloadLabel = [[UILabel alloc]init];
-	failedToDownloadLabel.text = @"Failed to fetch quiz data :(";
+	failedToDownloadLabel.text = @"It looks like you are offline, and we failed to fetch your list of quizzes :(";
 	failedToDownloadLabel.textColor = UIColor.whiteColor;
 	failedToDownloadLabel.textAlignment = NSTextAlignmentCenter;
 	failedToDownloadLabel.font = [UIFont systemFontOfSize:20];
@@ -107,7 +108,22 @@
 
 - (void)settingsBarButtonPressed
 {
-	// TODO: Fill in this method
+	SettingsViewController *controller = [[SettingsViewController alloc]initWithDelegate:self];
+	
+	controller.modalPresentationStyle = UIModalPresentationPopover;
+	controller.preferredContentSize = CGSizeMake(self.view.frame.size.width, 200);
+	
+	// configure popover style & delegate
+	UIPopoverPresentationController *popover =  controller.popoverPresentationController;
+	popover.delegate = controller;
+	popover.sourceView = controller.view;
+	popover.sourceRect = CGRectMake(1, 1, self.view.frame.size.width, 150);
+	[UIView animateWithDuration:0.2 animations:^{
+		self.view.alpha = 0.5;
+	}];
+	
+	// display the controller in the usual way
+	[self presentViewController:controller animated:YES completion:nil];
 }
 
 #pragma mark - UITableView Delegate Methods
@@ -119,6 +135,27 @@
 	NSArray *questions = [quizDict objectForKey:@"questions"];
 	QuestionViewController *viewController = [[QuestionViewController alloc]initWithQuestionData:questions];
 	[self.navigationController pushViewController:viewController animated:YES];
+}
+
+#pragma mark - Settings Delegate
+
+- (void)checkNowButtonPressed:(NSString *)urlString
+{
+	// try fetching new url
+	// reload table view
+	[UIView animateWithDuration:0.2 animations:^{
+		self.view.alpha = 1.0;
+	}];
+	[self dismissViewControllerAnimated:YES completion:nil];
+	
+}
+
+- (void)cancelButtonPressed
+{
+	[UIView animateWithDuration:0.2 animations:^{
+		self.view.alpha = 1.0;
+	}];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
