@@ -9,7 +9,7 @@
 #import "QuestionViewController.h"
 #import "QuizSelectionViewController.h"
 #import "QuizSelectionDataSource.h"
-#import "QuizTopicAPI.h"
+#import "QuizDataAPI.h"
 #import "WelcomeView.h"
 
 @interface QuizSelectionViewController ()
@@ -66,13 +66,13 @@
 
 - (void)fetchDataAndSetupTableViewWithUrl:(NSString * _Nullable)urlString
 {
-	[QuizTopicAPI getQuizDataWithUrl:urlString CompletionHandler:^(NSArray * _Nonnull results, NSError * _Nonnull error) {
+	[QuizDataAPI getQuizDataWithUrl:urlString CompletionHandler:^(NSArray * _Nonnull results, NSError * _Nonnull error) {
 		__weak __typeof__(self) weakSelf = self;
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if (error) {
 				// try to read from disk
 				// otherwise, displayfailed download
-				NSArray *data = [QuizTopicAPI readQuizDataFromDisk];
+				NSArray *data = [QuizDataAPI readQuizDataFromDisk];
 				if (data) {
 					[weakSelf createTableView:data];
 				} else {
@@ -147,7 +147,7 @@
 
 - (void)checkNowButtonPressed:(NSString *)urlString
 {
-	[QuizTopicAPI deleteQuizDataFromDisk];
+	[QuizDataAPI deleteQuizDataFromDisk];
 	[self.tableView removeFromSuperview];
 	
 	[self fetchDataAndSetupTableViewWithUrl:urlString];

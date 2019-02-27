@@ -1,15 +1,15 @@
 //
-//  QuizTopicAPI.m
+//  QuizDataAPI.m
 //  iQuiz
 //
 //  Created by Dustin Langner on 2/17/19.
 //  Copyright © 2019 Dustin Langner. All rights reserved.
 //
 
-#import "QuizTopicAPI.h"
+#import "QuizDataAPI.h"
 
 
-@implementation QuizTopicAPI
+@implementation QuizDataAPI
 
 + (void)getQuizDataWithUrl:(NSString * _Nullable)urlString CompletionHandler:(void (^)(NSArray * _Nullable results, NSError *error))completionHandler {
 	NSString *queryString = urlString ? urlString : @"https://tednewardsandbox.site44.com/questions.json";

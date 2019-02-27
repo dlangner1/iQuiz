@@ -1,5 +1,5 @@
 //
-//  QuizTopicAPI.h
+//  QuizDataAPI.h
 //  iQuiz
 //
 //  Created by Dustin Langner on 2/17/19.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QuizTopicAPI : NSObject
+@interface QuizDataAPI : NSObject
 
 + (void)getQuizDataWithUrl:(NSString * _Nullable)urlString CompletionHandler:(void (^)(NSArray * _Nullable results, NSError *error))completionHandler ;
 + (void)saveQuizDataToDisk:(NSData *)data;

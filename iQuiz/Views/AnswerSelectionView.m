@@ -103,10 +103,6 @@
 	sender.backgroundColor = twitterPink;
 	[sender setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
 	lastSelectedButton = sender;
-	
-	// TODO: call delegate method here
-	
-	
 }
 
 @end
